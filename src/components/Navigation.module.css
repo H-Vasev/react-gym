@@ -1,0 +1,27 @@
+.navigation {
+  margin: 1rem 4rem;
+  padding: 0;
+  padding-bottom: 3px;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-bar {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-bar a {
+  color: white;
+  text-decoration: none;
+}
