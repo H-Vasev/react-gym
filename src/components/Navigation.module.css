@@ -1,19 +1,27 @@
+.container{
+  background-color: rgb(53, 26, 33, 0.3);
+  position: fixed;
+  width: 100%;
+}
+
 .navigation {
-  margin: 1rem 4rem;
-  padding: 0;
-  padding-bottom: 3px;
   color: #ffffff;
   text-transform: uppercase;
   font-size: 15px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem 3rem;
 }
 
 .nav-bar {
   display: flex;
   list-style: none;
   gap: 1rem;
+}
+
+.nav-bar a:hover{
+  color:  #a99499;
 }
 
 .title {
