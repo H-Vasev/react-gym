@@ -1,6 +1,5 @@
 import { videoActions } from "./videos-slice";
-import selectedVideos, { selectedVideoActions } from "./selected-videos-slice";
-import { json } from "react-router-dom";
+import { selectedVideoActions } from "./selected-videos-slice";
 
 export const fetchVideoData = () => {
   return async (dispatch) => {

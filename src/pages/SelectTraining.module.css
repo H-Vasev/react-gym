@@ -36,3 +36,12 @@
   padding: 2rem 3rem;
   padding-top: 8rem;
 }
+
+
+.button{
+  background-color: white;
+  color: black;
+  padding: 0.5rem;
+  border-radius: 1rem;
+
+}

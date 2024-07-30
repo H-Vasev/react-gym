@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchVideoData, sendVideo } from "../store/video-actions";
-import classes from "./Training.module.css";
-import SelectedVideos from "./SelectedVideos";
+import classes from "./SelectTraining.module.css";
+import SelectedVideos from "../components/SelectedVideos";
 
-export default function Training() {
+export default function SelectTraining() {
 
   const dispatch = useDispatch();
   const allVideos = useSelector((state) => state.video.videos);
@@ -44,27 +44,3 @@ export default function Training() {
     </>
   );
 }
-
-// export async function loader() {
-//   const response = await fetch("https://localhost:7010/training");
-//   const resData = await response.json();
-
-//   return resData;
-// }
-
-// export async function action({ request, params }) {
-//   const form = await request.formData();
-
-//   const videoData = {
-//     fileName: form.get("fileName"),
-//     url: form.get("url")
-//   }
-
-//   await fetch("https://localhost:7010/selectVideo",{
-//     method: "POST",
-//     headers: {"Content-Type": "application/json"},
-//     body: JSON.stringify(videoData)
-//   })
-
-//   return videoData.url;
-// }

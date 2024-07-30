@@ -3,7 +3,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import RootLayout from "./pages/RootLayout";
 
-import Training from "./components/Training";
+import SelectTraining from "./pages/SelectTraining";
+import Training from "./pages/Training";
 
 const route = createBrowserRouter([
   {
@@ -12,9 +13,10 @@ const route = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       {
-        path: "/training",
-        element: <Training />,
+        path: "training",
+        element: <SelectTraining />,
       },
+      { path: "start", element: <Training /> },
     ],
   },
 ]);
