@@ -1,29 +1,43 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import classes from "./Training.module.css";
+import { fetchSelectedVideos, removeVideo } from "../store/video-actions";
 
 export default function SelectedVideos() {
-  const [selectedVideos, setSelectedVideos] = useState([]);
+  const dispatch = useDispatch();
+  const videosData = useSelector(state => state.selectedVideos.selectedVideos)
+
+  useEffect(() => {
+    dispatch(fetchSelectedVideos())
+  },[dispatch])
+  
+  function removeItemHandler(fileName){
+   dispatch(removeVideo(fileName))
+  }
 
   return (
     <>
       <div className={classes.container}>
         <h1>Selected videos</h1>
-        
-          {selectedVideos.length < 1 ? <h3>You have't select any exercise yet!</h3> : <ul className={classes.videos}>
-            {selectedVideos.map((item, index) => (
-              <li key={index}>
+
+        {videosData && videosData.length > 0 ? (
+          <ul className={classes.videos}>
+            {videosData.map((item) => (
+              <li key={item.fileName}>
                 <div className={classes.description}>
-                  <h2>Some name</h2>
-                  <button>Select</button>
+                  <h2>{item.fileName}</h2>
+                  <button onClick={() => removeItemHandler(item.fileName)}>Remove</button>
                 </div>
                 <video className={classes.video} width="600" controls loop>
                   <source src={item.url} type="video/mp4" />
                 </video>
               </li>
             ))}
-          </ul>}
-        
+          </ul>
+        ) : (
+          <h3>You have't select any exercise yet!</h3>
+        )}
       </div>
     </>
   );

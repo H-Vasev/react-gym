@@ -2,7 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./pages/Home";
 import RootLayout from "./pages/RootLayout";
-import Training, { loader as loadVideos, action as actionVideo } from "./components/Training";
+
+import Training from "./components/Training";
 
 const route = createBrowserRouter([
   {
@@ -10,7 +11,10 @@ const route = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { index: true, element: <Home /> },
-      { path: "/training", element: <Training />, loader: loadVideos, action: actionVideo },
+      {
+        path: "/training",
+        element: <Training />,
+      },
     ],
   },
 ]);
