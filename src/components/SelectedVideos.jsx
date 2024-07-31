@@ -2,7 +2,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import classes from "../pages/SelectTraining.module.css";
-import { fetchSelectedVideos, removeVideo } from "../store/video-actions";
+import {
+  fetchSelectedVideos,
+  popUpIsVisible,
+  removeVideo,
+} from "../store/video-actions";
 import { Link } from "react-router-dom";
 
 export default function SelectedVideos() {
@@ -17,6 +21,9 @@ export default function SelectedVideos() {
 
   function removeItemHandler(fileName) {
     dispatch(removeVideo(fileName));
+
+    const data = { name: fileName, isVisible: true, isSelected: false };
+    dispatch(popUpIsVisible(data));
   }
 
   return (
@@ -26,7 +33,9 @@ export default function SelectedVideos() {
 
         {videosData && videosData.length > 0 ? (
           <>
-            <Link className={classes.button} to="/start">Start training</Link>
+            <Link className={classes.button} to="/start">
+              Start training
+            </Link>
             <ul className={classes.videos}>
               {videosData.map((item) => (
                 <li key={item.fileName}>

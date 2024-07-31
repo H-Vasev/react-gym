@@ -1,6 +1,13 @@
 import { videoActions } from "./videos-slice";
 import { selectedVideoActions } from "./selected-videos-slice";
 
+export const popUpIsVisible = (data) => {
+  return (dispatch) => {
+    //console.log(data)
+    dispatch(videoActions.isVisible(data))
+  }
+}
+
 export const fetchVideoData = () => {
   return async (dispatch) => {
     const fetchData = async () => {

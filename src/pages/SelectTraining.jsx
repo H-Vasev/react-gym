@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchVideoData, sendVideo } from "../store/video-actions";
+import { fetchVideoData, popUpIsVisible, sendVideo } from "../store/video-actions";
 import classes from "./SelectTraining.module.css";
 import SelectedVideos from "../components/SelectedVideos";
 
@@ -16,6 +16,9 @@ export default function SelectTraining() {
 
   function handleSelectVideo(fileName, url){
     dispatch(sendVideo(fileName, url))
+
+    const videoData = {name: fileName, isVisible: true, isSelected: true}
+    dispatch(popUpIsVisible(videoData))
   }
 
   return (
