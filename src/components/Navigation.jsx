@@ -12,7 +12,6 @@ export default function Navigation() {
   const dispatch = useDispatch();
   const popUpData = useSelector((state) => state.video.popUpData);
   const isVisible = popUpData.isVisible;
-  console.log(`Navigation: ${isVisible}`);
 
   useEffect(() => {
     if (isVisible) {

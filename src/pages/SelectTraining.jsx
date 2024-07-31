@@ -37,7 +37,7 @@ export default function SelectTraining() {
                   Select
                 </button>
               </div>
-              <video className={classes.video} width="600" controls loop>
+              <video className={classes.video} width="600" loop autoPlay>
                 <source src={item.url} type="video/mp4" />
               </video>
             </li>
