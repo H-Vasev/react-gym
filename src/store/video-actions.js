@@ -37,13 +37,13 @@ export const fetchSelectedVideos = () => {
   };
 };
 
-export const sendVideo = (fileName, url) => {
+export const sendVideo = (fileName, url, description, duration) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch("https://localhost:7010/selectVideo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fileName, url }),
+        body: JSON.stringify({ fileName, url, description, duration }),
       });
 
       const data = await response.json();

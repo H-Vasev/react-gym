@@ -9,52 +9,78 @@ export default function Training() {
   const dispatch = useDispatch();
   const videos = useSelector((state) => state.selectedVideos.selectedVideos);
 
-  const [isStart, setIsStart] = useState(false);
-
-  const [allVideos, setAllVideos] = useState(videos);
-  const [videoIndex, setVideoIndex] = useState(null);
-
+  const [data, setData] = useState({
+    allVideos: videos,
+    isStart: false,
+    videoIndex: null,
+    cssIndex: null,
+  });
 
   useEffect(() => {
     dispatch(fetchSelectedVideos());
   }, [dispatch]);
 
-  function handleStart(){
-    setIsStart((prev) => !prev);
+  function handleStart() {
+    setData((prev) => {
+      return {
+        ...prev,
+        isStart: !prev.isStart,
+      };
+    });
   }
 
-  function selectVideoHandler(index){
-    console.log(index)
-    if(videoIndex === null){
-      setVideoIndex(index);
-    }else {
-      const updatedVideos = [...allVideos]
-      const currVideo = updatedVideos[index];
+  function selectVideoHandler(index) {
+    console.log(index);
+    if (data.videoIndex === null) {
+      setData((prev) => {
+        return {
+          ...prev,
+          videoIndex: index,
+          cssIndex: index,
+        };
+      });
+    } else {
+      const updatedVideos = [...data.allVideos];
+      
+      var currVideo = updatedVideos[data.videoIndex];
+      updatedVideos.splice(data.videoIndex, 1);
+      updatedVideos.splice(index, 0, currVideo)
 
-      const temp = updatedVideos[videoIndex];
-
-      updatedVideos[videoIndex] = currVideo
-      updatedVideos[index] = temp
-
-      setAllVideos(updatedVideos)
-      setVideoIndex(null)
+      setData((prev) => {
+        return {
+          ...prev,
+          allVideos: updatedVideos,
+          videoIndex: null,
+          cssIndex: null,
+        };
+      });
     }
   }
 
   return (
     <>
       <div className={classes.container}>
-        {isStart && <TrainingModal videos={allVideos}/>}
+        {data.isStart && <TrainingModal videos={data.allVideos} />}
         <h1>Train</h1>
-        {!isStart && <button onClick={handleStart}>Start</button>}
-        {allVideos && allVideos.length > 0 ? (
+        {!data.isStart && <button onClick={handleStart}>Start</button>}
+        {data.allVideos && data.allVideos.length > 0 ? (
           <ul className={classes.videos}>
-            {allVideos.map((item, index) => (
-              <li key={item.fileName} onClick={() => selectVideoHandler(index)}>
+            {data.allVideos.map((item, index) => (
+              <li
+                key={item.fileName}
+                className={data.cssIndex === index ? classes.selected : ""}
+              >
                 <div className={classes.description}>
                   <h2>{item.fileName}</h2>
+                  <p><span>{item.duration}: </span>{item.description}</p>
                 </div>
-                <video className={classes.video} width="600" loop autoPlay>
+                <video
+                  onClick={() => selectVideoHandler(index)}
+                  className={classes.video}
+                  width="600"
+                  loop
+                  autoPlay
+                >
                   <source src={item.url} type="video/mp4" />
                 </video>
               </li>

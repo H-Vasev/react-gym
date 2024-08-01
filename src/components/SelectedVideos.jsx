@@ -45,6 +45,7 @@ export default function SelectedVideos() {
                       Remove
                     </button>
                   </div>
+                  <p><span>{item.duration}: </span>{item.description}</p>
                   <video className={classes.video} width="600" loop autoPlay>
                     <source src={item.url} type="video/mp4" />
                   </video>
