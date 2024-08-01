@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSelectedVideos } from "../store/video-actions";
 import classes from "./Training.module.css";
 import TrainingModal from "../components/TrainingModal";
+import TrainListItem from "../components/TrainListItem";
 
 export default function Training() {
   const dispatch = useDispatch();
@@ -41,10 +42,10 @@ export default function Training() {
       });
     } else {
       const updatedVideos = [...data.allVideos];
-      
+
       var currVideo = updatedVideos[data.videoIndex];
       updatedVideos.splice(data.videoIndex, 1);
-      updatedVideos.splice(index, 0, currVideo)
+      updatedVideos.splice(index, 0, currVideo);
 
       setData((prev) => {
         return {
@@ -66,24 +67,13 @@ export default function Training() {
         {data.allVideos && data.allVideos.length > 0 ? (
           <ul className={classes.videos}>
             {data.allVideos.map((item, index) => (
-              <li
+              <TrainListItem
                 key={item.fileName}
-                className={data.cssIndex === index ? classes.selected : ""}
-              >
-                <div className={classes.description}>
-                  <h2>{item.fileName}</h2>
-                  <p><span>{item.duration}: </span>{item.description}</p>
-                </div>
-                <video
-                  onClick={() => selectVideoHandler(index)}
-                  className={classes.video}
-                  width="600"
-                  loop
-                  autoPlay
-                >
-                  <source src={item.url} type="video/mp4" />
-                </video>
-              </li>
+                item={item}
+                index={index}
+                selectVideo={selectVideoHandler}
+                cssIndex={data.cssIndex}
+              />        
             ))}
           </ul>
         ) : (

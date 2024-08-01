@@ -20,11 +20,16 @@
     list-style: none;
   }
   
-  .description{
+  .description-container{
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       margin-bottom: 1rem;
+  }
+
+  .description{
+    display: flex;
+    justify-content: space-between;
   }
   
   .video {
@@ -43,3 +48,6 @@
     background-color: rgba(255, 161, 161, 0.5);
   }
   
+  span{
+    color: white;
+  }
