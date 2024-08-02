@@ -1,18 +1,34 @@
 import { useRef, useState } from "react";
 import classes from "../pages/Training.module.css";
 
-export default function TrainListItem({ index, item, selectVideo, cssIndex }) {
+export default function TrainListItem({
+  index,
+  item,
+  selectVideo,
+  cssIndex,
+  stateData,
+}) {
   const [change, setChange] = useState(false);
   const inputRef = useRef();
 
-  if (inputRef.current) {
-    console.log(inputRef.current.value);
-  }
   function selectVideoHandler(index) {
     selectVideo(index);
   }
 
   function handleChangeDuration() {
+    if (inputRef.current) {
+      stateData((prev) => {
+        const updateVideos = [...prev.allVideos];
+        let video = { ...updateVideos[index] };
+        video.description = inputRef.current.value;
+        updateVideos[index] = video;
+
+        return {
+          ...prev,
+          allVideos: updateVideos,
+        };
+      });
+    }
     setChange((prev) => !prev);
   }
 
@@ -25,7 +41,7 @@ export default function TrainListItem({ index, item, selectVideo, cssIndex }) {
             <div>
               <span>{item.duration}: </span>
               {change ? (
-                <input ref={inputRef} />
+                <input ref={inputRef} defaultValue={item.description}/>
               ) : (
                 <span>
                   {inputRef.current ? inputRef.current.value : item.description}

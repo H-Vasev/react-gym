@@ -58,6 +58,8 @@ export default function Training() {
     }
   }
 
+  console.log("here")
+
   return (
     <>
       <div className={classes.container}>
@@ -72,6 +74,7 @@ export default function Training() {
                 item={item}
                 index={index}
                 selectVideo={selectVideoHandler}
+                stateData={setData}
                 cssIndex={data.cssIndex}
               />        
             ))}
