@@ -58,8 +58,6 @@ export default function Training() {
     }
   }
 
-  console.log("here")
-
   return (
     <>
       <div className={classes.container}>

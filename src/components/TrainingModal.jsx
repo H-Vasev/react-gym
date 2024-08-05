@@ -1,64 +1,94 @@
 import { useEffect, useState } from "react";
 
 export default function TrainingModal({ videos }) {
-  const [video, setVideo] = useState(videos);
-  const [count, setCount] = useState(0);
+  const [videoIndex, setVideoIndex] = useState(0);
+  const [timer, setTimer] = useState(0);
+  const [isBreak, setIsBreak] = useState(false);
 
-  let currentVideo = video.length > 0 ? video[0] : "";
-
-  let remainder = parseInt(currentVideo.description);
+  let currentVideo = videos[videoIndex] || {};
 
   useEffect(() => {
-    if (currentVideo !== "" && currentVideo.duration === "Seconds") {
-      setCount(remainder);
-
-      const interval = setInterval(() => {
-        setCount((prev) => {
-          if (prev === 1) {
-            setVideo((state) => {
-              let currState = [...state];
-              currState.shift();
-              return currState;
-            });
-
-            return remainder;
-          } else {
-            return prev - 1;
-          }
-        });
-      }, 1000);
-      
-      return () => clearInterval(interval);
+    if (!currentVideo.url || isBreak) {
+      return;
     }
-  }, [video, currentVideo]);
+
+    const isVideoInSeconds = currentVideo.duration === "Seconds";
+    const initialTimer = isVideoInSeconds
+      ? parseInt(currentVideo.description)
+      : 0;
+    setTimer(initialTimer);
+
+    const interval = setInterval(() => {
+      setTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+
+          if (isVideoInSeconds) {
+            setIsBreak((prev) => (prev = true));
+
+            return 10;
+          } else {
+            setVideoIndex((prev) => prev + 1);
+          }
+
+          return initialTimer;
+        } else {
+          return prev - 1;
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [videoIndex, isBreak, currentVideo]);
+
+  useEffect(() => {
+    if (!isBreak) {
+      return;
+    }
+
+    const breakInterval = setInterval(() => {
+      setTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(breakInterval);
+          setVideoIndex((prev) => prev + 1);
+
+          setIsBreak((prev) => (prev = false));
+        } else {
+          return prev - 1;
+        }
+      });
+    }, 1000);
+
+    return () => clearInterval(breakInterval);
+  }, [isBreak]);
 
   function videoHandler() {
-    setVideo((state) => {
-      let currState = [...state];
-      currState.shift();
-      return currState;
-    });
-
-    setCount(5);
+    setIsBreak((prev) => (prev = false));
+    setVideoIndex((prev) => prev + 1);
   }
 
   return (
     <>
       <h1>Here</h1>
-      {currentVideo !== "" && currentVideo.duration === "Seconds" && (
-        <p>Time left: {count}</p>
-      )}
-      {currentVideo !== "" && currentVideo.duration !== "Seconds" && (
-        <p>Times: {currentVideo.description}</p>
-      )}
-      {currentVideo !== "" ? (
-        <video key={currentVideo.url} width="600" loop autoPlay>
-          <source src={currentVideo.url} type="video/mp4" />
-        </video>
+      {currentVideo.url ? (
+        <>
+          {isBreak ? (
+            <p>Break time: {timer}s</p>
+          ) : currentVideo.duration === "Seconds" ? (
+            <p>Time left: {timer}s</p>
+          ) : (
+            <p>Times: {currentVideo.description}</p>
+          )}
+          {!isBreak && (
+            <video key={currentVideo.url} width="600" loop autoPlay>
+              <source src={currentVideo.url} type="video/mp4" />
+            </video>
+          )}
+          <button onClick={videoHandler}>Next</button>
+        </>
       ) : (
-        <p>Congratulation you already complete the exercises!</p>
+        <p>Congratulations, you have completed the exercises!</p>
       )}
-      <button onClick={videoHandler}>Next</button>
     </>
   );
 }
