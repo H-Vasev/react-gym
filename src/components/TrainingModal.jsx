@@ -1,71 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import BreakTimer from "./BreakTimer";
+import VideoTimer from "./VideoTimer";
 
 export default function TrainingModal({ videos }) {
   const [videoIndex, setVideoIndex] = useState(0);
-  const [timer, setTimer] = useState(0);
   const [isBreak, setIsBreak] = useState(false);
 
   let currentVideo = videos[videoIndex] || {};
 
-  useEffect(() => {
-    if (!currentVideo.url || isBreak) {
-      return;
-    }
+  const breakTime = 10;
 
-    const isVideoInSeconds = currentVideo.duration === "Seconds";
-    const initialTimer = isVideoInSeconds
-      ? parseInt(currentVideo.description)
-      : 0;
-    setTimer(initialTimer);
-
-    const interval = setInterval(() => {
-      setTimer((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-
-          if (isVideoInSeconds) {
-            setIsBreak((prev) => (prev = true));
-
-            return 10;
-          } else {
-            setVideoIndex((prev) => prev + 1);
-          }
-
-          return initialTimer;
-        } else {
-          return prev - 1;
-        }
-      });
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [videoIndex, isBreak, currentVideo]);
-
-  useEffect(() => {
-    if (!isBreak) {
-      return;
-    }
-
-    const breakInterval = setInterval(() => {
-      setTimer((prev) => {
-        if (prev <= 1) {
-          clearInterval(breakInterval);
-          setVideoIndex((prev) => prev + 1);
-
-          setIsBreak((prev) => (prev = false));
-        } else {
-          return prev - 1;
-        }
-      });
-    }, 1000);
-
-    return () => clearInterval(breakInterval);
-  }, [isBreak]);
-
-  function videoHandler() {
-    setIsBreak((prev) => (prev = false));
+  function getBreakHandler() {
+    setIsBreak((prev) => (prev = true));
     setVideoIndex((prev) => prev + 1);
   }
+
+  console.log("Training model")
 
   return (
     <>
@@ -73,9 +23,9 @@ export default function TrainingModal({ videos }) {
       {currentVideo.url ? (
         <>
           {isBreak ? (
-            <p>Break time: {timer}s</p>
+            <BreakTimer isBreak={isBreak} handleBreak={setIsBreak} breakTime={breakTime}/>
           ) : currentVideo.duration === "Seconds" ? (
-            <p>Time left: {timer}s</p>
+            <VideoTimer videoState={currentVideo} handleExerciseTime={setIsBreak} handleVideoIndex={setVideoIndex} />
           ) : (
             <p>Times: {currentVideo.description}</p>
           )}
@@ -84,7 +34,7 @@ export default function TrainingModal({ videos }) {
               <source src={currentVideo.url} type="video/mp4" />
             </video>
           )}
-          <button onClick={videoHandler}>Next</button>
+          <button onClick={getBreakHandler}>Get Break</button>
         </>
       ) : (
         <p>Congratulations, you have completed the exercises!</p>
