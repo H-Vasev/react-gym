@@ -38,7 +38,7 @@ export default function Navigation() {
               <NavLink>Why us</NavLink>
             </li>
             <li>
-              <NavLink to="/training">start now</NavLink>
+              <NavLink to="/exercise">start now</NavLink>
             </li>
             <li>
               <NavLink>Contact Us</NavLink>

@@ -13,7 +13,7 @@ const route = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       {
-        path: "training",
+        path: "exercise",
         element: <SelectTraining />,
       },
       { path: "start", element: <Training /> },

@@ -9,6 +9,7 @@ const selectedVideos = createSlice({
     },
     addVideo(state, action) {
       const newItem = action.payload;
+      console.log(newItem)
       state.selectedVideos.push(newItem);
     },
     removeVideo(state, action){

@@ -11,13 +11,14 @@ export const popUpIsVisible = (data) => {
 export const fetchVideoData = () => {
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7010/training");
+      const response = await fetch("https://localhost:7010/exercise/allExercises");
 
       const data = await response.json();
       return data;
     };
-
+    
     const videoData = await fetchData();
+    console.log(videoData)
     dispatch(videoActions.allVideos(videoData));
   };
 };
@@ -25,7 +26,7 @@ export const fetchVideoData = () => {
 export const fetchSelectedVideos = () => {
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7010/selectedVideos");
+      const response = await fetch("https://localhost:7010/exercise/selectedVideos");
 
       const data = await response.json();
       return data;
@@ -37,16 +38,19 @@ export const fetchSelectedVideos = () => {
   };
 };
 
-export const sendVideo = (fileName, url, description, duration) => {
+export const sendVideo = (id, fileName, url, description, duration) => {
+
+  console.log(duration)
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7010/selectVideo", {
+      const response = await fetch("https://localhost:7010/exercise/addSelectedExercise", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ fileName, url, description, duration }),
+        body: JSON.stringify({ id, fileName, url, description, duration }),
       });
 
       const data = await response.json();
+      console.log(data)
       return data;
     };
 

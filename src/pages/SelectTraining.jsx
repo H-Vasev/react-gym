@@ -17,8 +17,9 @@ export default function SelectTraining() {
     dispatch(fetchVideoData());
   }, [dispatch]);
 
-  function handleSelectVideo(fileName, url, description, duration) {
-    dispatch(sendVideo(fileName, url, description, duration));
+  function handleSelectVideo(id, fileName, url, description, duration) {
+    console.log(id)
+    dispatch(sendVideo(id, fileName, url, description, duration));
 
     const videoData = { name: fileName, isVisible: true, isSelected: true };
     dispatch(popUpIsVisible(videoData));
@@ -32,12 +33,13 @@ export default function SelectTraining() {
         <ul className={classes.videos}>
           {allVideos &&
             allVideos.map((item) => (
-              <li key={item.fileName}>
+              <li key={item.id}>
                 <div className={classes.description}>
                   <h2>{item.fileName}</h2>
                   <button
                     onClick={() =>
                       handleSelectVideo(
+                        item.id,
                         item.fileName,
                         item.url,
                         item.description,
@@ -49,11 +51,11 @@ export default function SelectTraining() {
                   </button>
                 </div>
                 <p>
-                  <span>{item.duration}: </span>
-                  {item.description}
+                  <span>{item.description}: </span>
+                  {item.duration}
                 </p>
                 <video className={classes.video} width="600" loop autoPlay>
-                  <source src={item.url} type="video/mp4" />
+                  <source src={`https://localhost:7010${item.url}`} type="video/mp4" />
                 </video>
               </li>
             ))}
