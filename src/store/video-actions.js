@@ -33,14 +33,11 @@ export const fetchSelectedVideos = () => {
     };
 
     const videoData = await fetchData();
-    console.log(videoData)
     dispatch(selectedVideoActions.selectedVideos(videoData));
   };
 };
 
 export const sendVideo = (id, fileName, url, description, duration) => {
-
-  console.log(duration)
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch("https://localhost:7010/exercise/addSelectedExercise", {
@@ -50,7 +47,6 @@ export const sendVideo = (id, fileName, url, description, duration) => {
       });
 
       const data = await response.json();
-      console.log(data)
       return data;
     };
 
@@ -61,16 +57,18 @@ export const sendVideo = (id, fileName, url, description, duration) => {
   };
 };
 
-export const removeVideo = (fileName) => {
+export const removeVideo = (id, currentFileName) => {
   return async (dispatch) => {
-    const response = await fetch("https://localhost:7010/removeSelectedVideo", {
+    const response = await fetch("https://localhost:7010/exercise/removeSelectedVideo", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({fileName})
+      body: JSON.stringify(id)
     });
 
     const resData = await response.json();
-    if(resData.message === fileName){
+    const fileName = resData.message;
+
+    if(fileName === currentFileName){
       dispatch(selectedVideoActions.removeVideo(fileName))
     }
   };

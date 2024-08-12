@@ -19,8 +19,8 @@ export default function SelectedVideos() {
     dispatch(fetchSelectedVideos());
   }, [dispatch]);
 
-  function removeItemHandler(fileName) {
-    dispatch(removeVideo(fileName));
+  function removeItemHandler(fileName, id) {
+    dispatch(removeVideo(id, fileName));
 
     const data = { name: fileName, isVisible: true, isSelected: false };
     dispatch(popUpIsVisible(data));
@@ -41,7 +41,7 @@ export default function SelectedVideos() {
                 <li key={item.fileName}>
                   <div className={classes.description}>
                     <h2>{item.fileName}</h2>
-                    <button onClick={() => removeItemHandler(item.fileName)}>
+                    <button onClick={() => removeItemHandler(item.fileName, item.id)}>
                       Remove
                     </button>
                   </div>
