@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import classes from "../pages/SelectTraining.module.css";
@@ -47,7 +47,7 @@ export default function SelectedVideos() {
                   </div>
                   <p><span>{item.duration}: </span>{item.description}</p>
                   <video className={classes.video} width="600" loop autoPlay>
-                    <source src={item.url} type="video/mp4" />
+                    <source src={`https://localhost:7010${item.url}`} type="video/mp4" />
                   </video>
                 </li>
               ))}

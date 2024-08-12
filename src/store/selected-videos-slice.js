@@ -5,11 +5,10 @@ const selectedVideos = createSlice({
   initialState: { selectedVideos: [] },
   reducers: {
     selectedVideos(state, action) {
-      state.selectedVideos = action.payload.selectedVideos;
+      state.selectedVideos = action.payload;
     },
     addVideo(state, action) {
       const newItem = action.payload;
-      console.log(newItem)
       state.selectedVideos.push(newItem);
     },
     removeVideo(state, action){

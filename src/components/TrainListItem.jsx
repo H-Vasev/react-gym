@@ -20,7 +20,7 @@ export default function TrainListItem({
       stateData((prev) => {
         const updateVideos = [...prev.allVideos];
         let video = { ...updateVideos[index] };
-        video.description = inputRef.current.value;
+        video.duration = inputRef.current.value;
         updateVideos[index] = video;
 
         return {
@@ -39,12 +39,12 @@ export default function TrainListItem({
           <h2>{item.fileName}</h2>
           <div className={classes.description}>
             <div>
-              <span>{item.duration}: </span>
+              <span>{item.description}: </span>
               {change ? (
-                <input ref={inputRef} defaultValue={item.description}/>
+                <input ref={inputRef} defaultValue={item.duration}/>
               ) : (
                 <span>
-                  {inputRef.current ? inputRef.current.value : item.description}
+                  {inputRef.current ? inputRef.current.value : item.duration}
                 </span>
               )}
             </div>
@@ -58,7 +58,7 @@ export default function TrainListItem({
           loop
           autoPlay
         >
-          <source src={item.url} type="video/mp4" />
+          <source src={`https://localhost:7010${item.url}`} type="video/mp4" />
         </video>
       </li>
     </>

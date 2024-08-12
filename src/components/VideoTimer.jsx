@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export default function VideoTimer({ videoState, handleExerciseTime, handleVideoIndex }) {
-    const timeLeft = videoState.description;
+    const timeLeft = videoState.duration;
   
     const [timer, setTimer] = useState(timeLeft);
 

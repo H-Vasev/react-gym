@@ -24,14 +24,14 @@ export default function TrainingModal({ videos }) {
         <>
           {isBreak ? (
             <BreakTimer isBreak={isBreak} handleBreak={setIsBreak} breakTime={breakTime}/>
-          ) : currentVideo.duration === "Seconds" ? (
+          ) : currentVideo.description === "Seconds" ? (
             <VideoTimer videoState={currentVideo} handleExerciseTime={setIsBreak} handleVideoIndex={setVideoIndex} />
           ) : (
-            <p>Times: {currentVideo.description}</p>
+            <p>Times: {currentVideo.duration}</p>
           )}
           {!isBreak && (
             <video key={currentVideo.url} width="600" loop autoPlay>
-              <source src={currentVideo.url} type="video/mp4" />
+              <source src={`https://localhost:7010${currentVideo.url}`} type="video/mp4" />
             </video>
           )}
           <button onClick={getBreakHandler}>Get Break</button>

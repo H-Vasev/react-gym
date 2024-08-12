@@ -18,7 +18,7 @@ export const fetchVideoData = () => {
     };
     
     const videoData = await fetchData();
-    console.log(videoData)
+    //console.log(videoData)
     dispatch(videoActions.allVideos(videoData));
   };
 };
@@ -26,14 +26,14 @@ export const fetchVideoData = () => {
 export const fetchSelectedVideos = () => {
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7010/exercise/selectedVideos");
+      const response = await fetch("https://localhost:7010/exercise/getSelectedVideos");
 
       const data = await response.json();
       return data;
     };
 
     const videoData = await fetchData();
-    //console.log(videoData)
+    console.log(videoData)
     dispatch(selectedVideoActions.selectedVideos(videoData));
   };
 };

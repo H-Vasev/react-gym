@@ -31,7 +31,6 @@ export default function Training() {
   }
 
   function selectVideoHandler(index) {
-    console.log(index);
     if (data.videoIndex === null) {
       setData((prev) => {
         return {
