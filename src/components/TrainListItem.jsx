@@ -42,7 +42,7 @@ export default function TrainListItem({
             <div>
               <span>{item.description}: </span>
               {change ? (
-                <input ref={inputRef} defaultValue={item.duration}/>
+                <input className={classes.input} ref={inputRef} defaultValue={item.duration}/>
               ) : (
                 <span>
                   {inputRef.current ? inputRef.current.value : item.duration}

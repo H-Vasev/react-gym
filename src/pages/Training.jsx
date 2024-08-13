@@ -62,8 +62,9 @@ export default function Training() {
     <>
       <div className={classes.container}>
         {data.isStart && <TrainingModal videos={data.allVideos} />}
-        <h1>Train</h1>
-        {!data.isStart && <ButtonPrimary onClick={handleStart}>Start</ButtonPrimary>}
+        <h1>Configure your exercises</h1>
+        {!data.isStart && <ButtonPrimary onClick={handleStart}>Start training</ButtonPrimary>}
+        <h2>Rearrange by selecting them!</h2>
         {data.allVideos && data.allVideos.length > 0 ? (
           <ul className={classes.videos}>
             {data.allVideos.map((item, index) => (

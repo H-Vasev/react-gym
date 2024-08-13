@@ -30,12 +30,12 @@ export default function SelectedVideos() {
   return (
     <>
       <div className={classes.container}>
-        <h1>Selected Exercises</h1>
+        <h1>Select Your Exercises</h1>
 
         {videosData && videosData.length > 0 ? (
           <>
             <Link className={classes.button} to="/start">
-              Start training
+              Configure your exercises
             </Link>
             <ul className={classes.videos}>
               {videosData.map((item) => (
