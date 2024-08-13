@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import classes from "../pages/Training.module.css";
+import ButtonPrimary from "./ButtonPrimary";
 
 export default function TrainListItem({
   index,
@@ -48,7 +49,7 @@ export default function TrainListItem({
                 </span>
               )}
             </div>
-            <button onClick={handleChangeDuration}>Change</button>
+            <ButtonPrimary onClick={handleChangeDuration}>Change</ButtonPrimary>
           </div>
         </div>
         <video

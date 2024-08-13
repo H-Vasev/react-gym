@@ -18,8 +18,6 @@ export default function VideoTimer({ videoState, handleExerciseTime, handleVideo
 
         return () => clearInterval(interval)
     }, [timer])
-    
-console.log(`Video timer ${timer}`)
 
   return <p>Timer Left: {timer}</p>;
 }

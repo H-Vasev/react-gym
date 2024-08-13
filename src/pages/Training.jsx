@@ -5,6 +5,7 @@ import { fetchSelectedVideos } from "../store/video-actions";
 import classes from "./Training.module.css";
 import TrainingModal from "../components/TrainingModal";
 import TrainListItem from "../components/TrainListItem";
+import ButtonPrimary from "../components/ButtonPrimary";
 
 export default function Training() {
   const dispatch = useDispatch();
@@ -62,7 +63,7 @@ export default function Training() {
       <div className={classes.container}>
         {data.isStart && <TrainingModal videos={data.allVideos} />}
         <h1>Train</h1>
-        {!data.isStart && <button onClick={handleStart}>Start</button>}
+        {!data.isStart && <ButtonPrimary onClick={handleStart}>Start</ButtonPrimary>}
         {data.allVideos && data.allVideos.length > 0 ? (
           <ul className={classes.videos}>
             {data.allVideos.map((item, index) => (

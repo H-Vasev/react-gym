@@ -35,13 +35,10 @@ export default function Navigation() {
               <NavLink>Home</NavLink>
             </li>
             <li>
-              <NavLink>Why us</NavLink>
+              <NavLink>Select Program</NavLink>
             </li>
             <li>
-              <NavLink to="/exercise">start now</NavLink>
-            </li>
-            <li>
-              <NavLink>Contact Us</NavLink>
+              <NavLink to="/exercise">Configure your Onw</NavLink>
             </li>
           </ul>
         </nav>

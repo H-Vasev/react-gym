@@ -8,6 +8,7 @@ import {
 } from "../store/video-actions";
 import classes from "./SelectTraining.module.css";
 import SelectedVideos from "../components/SelectedVideos";
+import ButtonPrimary from "../components/ButtonPrimary";
 
 export default function SelectTraining() {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ export default function SelectTraining() {
               <li key={item.id}>
                 <div className={classes.description}>
                   <h2>{item.fileName}</h2>
-                  <button
+                  <ButtonPrimary
                     onClick={() =>
                       handleSelectVideo(
                         item.id,
@@ -48,7 +49,7 @@ export default function SelectTraining() {
                     }
                   >
                     Select
-                  </button>
+                  </ButtonPrimary>
                 </div>
                 <p>
                   <span>{item.description}: </span>

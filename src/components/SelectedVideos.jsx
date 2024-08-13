@@ -8,6 +8,7 @@ import {
   removeVideo,
 } from "../store/video-actions";
 import { Link } from "react-router-dom";
+import ButtonPrimary from "./ButtonPrimary";
 
 export default function SelectedVideos() {
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ export default function SelectedVideos() {
   return (
     <>
       <div className={classes.container}>
-        <h1>Selected videos</h1>
+        <h1>Selected Exercises</h1>
 
         {videosData && videosData.length > 0 ? (
           <>
@@ -41,11 +42,11 @@ export default function SelectedVideos() {
                 <li key={item.fileName}>
                   <div className={classes.description}>
                     <h2>{item.fileName}</h2>
-                    <button onClick={() => removeItemHandler(item.fileName, item.id)}>
+                    <ButtonPrimary onClick={() => removeItemHandler(item.fileName, item.id)}>
                       Remove
-                    </button>
+                    </ButtonPrimary>
                   </div>
-                  <p><span>{item.duration}: </span>{item.description}</p>
+                  <p><span>{item.description}: </span>{item.duration}</p>
                   <video className={classes.video} width="600" loop autoPlay>
                     <source src={`https://localhost:7010${item.url}`} type="video/mp4" />
                   </video>
