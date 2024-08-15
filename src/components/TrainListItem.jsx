@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import classes from "../pages/Training.module.css";
+import classes from "../pages/ConfigureExercises.module.css";
 import ButtonPrimary from "./ButtonPrimary";
 
 export default function TrainListItem({

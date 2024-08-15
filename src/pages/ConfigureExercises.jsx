@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchSelectedVideos } from "../store/video-actions";
-import classes from "./Training.module.css";
+import classes from "./ConfigureExercises.module.css";
 import TrainingModal from "../components/TrainingModal";
 import TrainListItem from "../components/TrainListItem";
 import ButtonPrimary from "../components/ButtonPrimary";
 
-export default function Training() {
+export default function ConfigureExercises() {
   const dispatch = useDispatch();
   const videos = useSelector((state) => state.selectedVideos.selectedVideos);
 

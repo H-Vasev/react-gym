@@ -19,5 +19,5 @@ export default function BreakTimer({ isBreak, handleBreak, breakTime }) {
 
   console.log(`Break timer: ${timer}`)
 
-  return <p>Break Time: {timer}</p>;
+  return <h2 style={{"fontSize": "3rem", "marginBottom": "5rem"}}>Break Time: {timer}</h2>;
 }

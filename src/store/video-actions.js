@@ -3,7 +3,6 @@ import { selectedVideoActions } from "./selected-videos-slice";
 
 export const popUpIsVisible = (data) => {
   return (dispatch) => {
-    //console.log(data)
     dispatch(videoActions.isVisible(data))
   }
 }
@@ -18,7 +17,6 @@ export const fetchVideoData = () => {
     };
     
     const videoData = await fetchData();
-    //console.log(videoData)
     dispatch(videoActions.allVideos(videoData));
   };
 };

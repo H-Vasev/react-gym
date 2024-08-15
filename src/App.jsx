@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import RootLayout from "./pages/RootLayout";
 
 import SelectTraining from "./pages/SelectTraining";
-import Training from "./pages/Training";
+import ConfigureExercises from "./pages/ConfigureExercises";
 
 const route = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ const route = createBrowserRouter([
         path: "exercise",
         element: <SelectTraining />,
       },
-      { path: "start", element: <Training /> },
+      { path: "start", element: <ConfigureExercises /> },
     ],
   },
 ]);

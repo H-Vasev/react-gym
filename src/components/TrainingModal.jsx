@@ -12,8 +12,12 @@ export default function TrainingModal({ videos }) {
   const breakTime = 10;
 
   function getBreakHandler() {
-    setIsBreak((prev) => (prev = true));
-    setVideoIndex((prev) => prev + 1);
+    if(isBreak){
+      setIsBreak((prev) => (!prev));
+    }else{
+      setIsBreak((prev) => (!prev));
+      setVideoIndex((prev) => prev + 1);
+    }
   }
 
   return (
@@ -33,7 +37,7 @@ export default function TrainingModal({ videos }) {
               <source src={`https://localhost:7010${currentVideo.url}`} type="video/mp4" />
             </video>
           )}
-          <ButtonPrimary onClick={getBreakHandler}>Get Break</ButtonPrimary>
+          <ButtonPrimary onClick={getBreakHandler}>{isBreak ? "Skip" : "Get Break"}</ButtonPrimary>
         </>
       ) : (
         <p>Congratulations, you have completed the exercises!</p>
