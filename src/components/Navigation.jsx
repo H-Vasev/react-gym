@@ -35,12 +35,13 @@ export default function Navigation() {
               <NavLink>Home</NavLink>
             </li>
             <li>
-              <NavLink>Select Program</NavLink>
+              <NavLink>Select Workout</NavLink>
             </li>
             <li>
-              <NavLink to="/exercise">Configure your Onw</NavLink>
+              <NavLink to="/exercise">Configure your Workout</NavLink>
             </li>
           </ul>
+          <NavLink to="/login">Login</NavLink>
         </nav>
 
         {isVisible && (
