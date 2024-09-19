@@ -7,15 +7,13 @@ export default function LogIn() {
         <div>
           <h1>LogIn</h1>
           <div className={classes["form-container"]}>
-            <div>
-              <label>Email</label>
-              <input type="email" />
-            </div>
-            <div>
-              <label>Password</label>
-              <input type="text" />
-            </div>
-            <div>
+            <label>Email</label>
+            <input type="email" />
+
+            <label>Password</label>
+            <input type="text" />
+
+            <div className={classes["button-container"]}>
               <button>LogIn</button>
               <button>Register</button>
             </div>
