@@ -55,3 +55,7 @@
     border-radius: 0.2rem;
     padding: 0.2rem;
 }
+
+.container span{
+    margin-left: 0.5rem;
+}
