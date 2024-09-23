@@ -10,7 +10,7 @@
 
 .container>div{
     background-color: #b5b1b2;
-    width: 25%;
+    width: 30%;
     padding: 2rem;
     border-radius: 1rem;
 }
@@ -58,4 +58,9 @@
 
 .container span{
     margin-left: 0.5rem;
+}
+
+.error-message{
+    color: red;
+    font-size: 12px;
 }

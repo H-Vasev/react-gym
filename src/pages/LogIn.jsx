@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+
 import classes from "./LogIn.module.css";
-import { useRef } from "react";
+import { validateForm } from "../utilities/formValidation.js";
 
 export default function LogIn() {
   const [signUp, setSignUp] = useState(false);
   const [messages, setMessages] = useState({
-    isError: false,
+    isEmailError: false,
+    isPasswordError: false,
+    isConfirmPassError: false,
     email: "",
     password: "",
     confirmPassword: "",
@@ -28,26 +31,16 @@ export default function LogIn() {
       confirmPassword: signUp ? confirmPasswordRef.current.value : null,
     };
 
-    if (
-      formData.confirmPassword != null &&
-      formData.password != formData.confirmPassword
-    ) {
-      setMessages((prevState) => {
-        return {
-          ...prevState,
-          isError: true,
-          confirmPassword: "Does not match the password!",
-        };
-      });
-    }
+    const validations = validateForm(formData);
 
-    console.log(formData);
-
+    setMessages(prevState => prevState = validations)
+    
     emailRef.current.value = "";
     passwordRef.current.value = "";
     confirmPasswordRef.current.value = "";
   }
-
+  
+  console.log(messages)
   return (
     <>
       <div className={classes.container}>
@@ -56,13 +49,15 @@ export default function LogIn() {
           <form className={classes["form-container"]}>
             <label>Email</label>
             <input type="email" ref={emailRef} required />
+            {messages.isEmailError && <p className={classes["error-message"]}>{messages.email}</p>}
             <label>Password</label>
             <input type="password" ref={passwordRef} required />
+            {messages.isPasswordError && <p className={classes["error-message"]}>{messages.password}</p>}
             {signUp && <label>Confirm Password</label>}
             {signUp && (
-              <input type="password" ref={confirmPasswordRef} required />            
+              <input type="password" ref={confirmPasswordRef} required />
             )}
-            {messages.isError && <p>{messages.confirmPassword}</p>}
+            {messages.isConfirmPassError && <p className={classes["error-message"]}>{messages.confirmPassword}</p>}
             <div className={classes["button-container"]}>
               {!signUp && <button type="button">LogIn</button>}
               {!signUp && <span>or</span>}
