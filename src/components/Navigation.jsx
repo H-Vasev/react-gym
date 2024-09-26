@@ -13,6 +13,9 @@ export default function Navigation() {
   const popUpData = useSelector((state) => state.video.popUpData);
   const isVisible = popUpData.isVisible;
 
+  const isLoggedIn = useSelector((state) => state.user.loggedUser); 
+  console.log(isLoggedIn)
+
   useEffect(() => {
     if (isVisible) {
       const data = { name: "", isVisible: false, isSelected: false };
@@ -41,7 +44,8 @@ export default function Navigation() {
               <NavLink to="/exercise">Configure your Workout</NavLink>
             </li>
           </ul>
-          <NavLink to="/login">Login</NavLink>
+          {isLoggedIn ? <p>Welcome: {isLoggedIn}</p> : ""}
+          {isLoggedIn ? <button>LogOut</button> : <NavLink to="/login">Login</NavLink>}
         </nav>
 
         {isVisible && (

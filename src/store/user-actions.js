@@ -1,0 +1,31 @@
+import { userActions } from "./user-slice";
+
+export const fetchRegisteredUser = (email, password, confirmPassword) => {
+  return async (dispatch) => {
+    const fetchData = async () => {
+      const response = await fetch("https://localhost:7010/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, confirmPassword }),
+      });
+
+      if(!response.ok){
+        return {message: "Registration failed"}
+      }
+
+      const resData = await response.json();
+      return resData;
+    };
+
+    try{
+        const response = await fetchData()
+
+        const token = response.token;
+        localStorage.setItem("authToken", token)
+
+        dispatch(userActions.registerUser(response));
+    }catch (error){
+        console.log(error)
+    }
+  };
+};

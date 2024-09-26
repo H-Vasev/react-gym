@@ -1,7 +1,11 @@
 import { useState, useRef } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import classes from "./LogIn.module.css";
 import { validateForm } from "../utilities/formValidation.js";
+import { fetchRegisteredUser } from "../store/user-actions.js";
+
 
 export default function LogIn() {
   const [signUp, setSignUp] = useState(false);
@@ -14,6 +18,9 @@ export default function LogIn() {
     confirmPassword: "",
   });
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
@@ -22,7 +29,7 @@ export default function LogIn() {
     setSignUp((state) => !state);
   }
 
-  function handleRegister(event) {
+  async function handleRegister(event) {
     event.preventDefault();
 
     const formData = {
@@ -32,15 +39,18 @@ export default function LogIn() {
     };
 
     const validations = validateForm(formData);
-
     setMessages(prevState => prevState = validations)
+
+    if(!validations.isEmailError && !validations.isPasswordError && !validations.isConfirmPassError){
+      await dispatch(fetchRegisteredUser(formData.email, formData.password, formData.confirmPassword))
+      navigate("/")
+    }
     
     emailRef.current.value = "";
     passwordRef.current.value = "";
     confirmPasswordRef.current.value = "";
   }
   
-  console.log(messages)
   return (
     <>
       <div className={classes.container}>
