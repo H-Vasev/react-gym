@@ -26,7 +26,7 @@ export function validateForm(formData) {
     messages.password = "";
   }
 
-  if (formData.confirmPassword != formData.password) {
+  if (formData.confirmPassword !== null && formData.confirmPassword !== formData.password) {
     messages.isConfirmPassError = true;
     messages.confirmPassword = "The password you entered don't match!";
   } else {
