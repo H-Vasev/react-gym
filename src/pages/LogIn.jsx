@@ -37,12 +37,13 @@ export default function LogIn() {
       confirmPassword: signUp ? confirmPasswordRef.current?.value : null,
     };
     const validations = validateForm(formData);
+    console.log(validations)
     setMessages((prevState) => (prevState = validations));
 
     if (
       !validations.isEmailError &&
       !validations.isPasswordError &&
-      validations.isConfirmPassError
+      !validations.isConfirmPassError
     ) {
       await dispatch(
         fetchRegisteredUser(

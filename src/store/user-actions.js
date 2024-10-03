@@ -21,7 +21,7 @@ export const fetchRegisteredUser = (email, password, confirmPassword) => {
         const response = await fetchData()
 
         const token = response.token;
-        localStorage.setItem("authToken", token)
+        localStorage.setItem("authUser", token)
 
         dispatch(userActions.registerUser(response));
     }catch (error){
@@ -31,8 +31,6 @@ export const fetchRegisteredUser = (email, password, confirmPassword) => {
 };
 
 export const fetchLogIn = (email, password) => {
-  console.log(email, password)
-  
   return async (despatch) => {
     const fetchData = async () => {
        const response = await fetch("https://localhost:7010/login", {

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 import { popUpIsVisible } from "../store/video-actions";
+import { userActions } from "../store/user-slice";
 
 import classes from "./Navigation.module.css";
 import PopUp from "./PopUp";
@@ -28,6 +29,12 @@ export default function Navigation() {
     }
   }, [isVisible, dispatch]);
 
+  function handleLogout(){
+    localStorage.removeItem("authUser");
+
+    dispatch(userActions.setLoggedOut())
+  }
+
   return (
     <>
       <div className={classes.container}>
@@ -45,7 +52,7 @@ export default function Navigation() {
             </li>
           </ul>
           {isLoggedIn ? <p>Welcome: {isLoggedIn}</p> : ""}
-          {isLoggedIn ? <button>LogOut</button> : <NavLink to="/login">Login</NavLink>}
+          {isLoggedIn ? <button onClick={handleLogout}>LogOut</button> : <NavLink to="/login">Login</NavLink>}
         </nav>
 
         {isVisible && (
