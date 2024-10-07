@@ -27,7 +27,8 @@ export function validateForm(formData) {
   }
 
   if (
-    formData.confirmPassword === formData.password
+    formData.confirmPassword === formData.password ||
+    formData.confirmPassword === null
   ) {
     messages.isConfirmPassError = false;
     messages.confirmPassword = "";

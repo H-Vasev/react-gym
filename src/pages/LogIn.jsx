@@ -28,6 +28,8 @@ export default function LogIn() {
     setSignUp((state) => !state);
   }
 
+  console.log(signUp);
+
   async function handleRegister(event) {
     event.preventDefault();
 
@@ -37,13 +39,14 @@ export default function LogIn() {
       confirmPassword: signUp ? confirmPasswordRef.current?.value : null,
     };
     const validations = validateForm(formData);
-    console.log(validations)
-    setMessages((prevState) => (prevState = validations));
+
+    setMessages((prevState) => ({...prevState, ...validations}));
 
     if (
       !validations.isEmailError &&
       !validations.isPasswordError &&
-      !validations.isConfirmPassError
+      !validations.isConfirmPassError &&
+      signUp
     ) {
       await dispatch(
         fetchRegisteredUser(
@@ -56,14 +59,28 @@ export default function LogIn() {
     }
 
     if (!signUp && !validations.isEmailError && !validations.isPasswordError) {
-      await dispatch(fetchLogIn(formData.email, formData.password));
-      navigate("/");
+      const err = await dispatch(fetchLogIn(formData.email, formData.password));
+      if(err){
+        console.log(err);
+        setMessages(prevState => {
+          return {
+            ...prevState,
+            isEmailError: true,
+            isPasswordError: true,
+            email: err,
+            password: err
+          }
+        })
+      }else {
+        navigate("/");
+      }
+      
     }
 
     emailRef.current.value = "";
     passwordRef.current.value = "";
 
-    if(confirmPasswordRef.current){
+    if (confirmPasswordRef.current) {
       confirmPasswordRef.current.value = "";
     }
   }

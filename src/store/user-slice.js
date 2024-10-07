@@ -9,7 +9,12 @@ const userSlice = createSlice({
             state.loggedUser = action.payload.username;
         },
         setLoggedIn(state, action){
-            state.loggedUser = action.payload.username;
+            console.log(action.payload)
+            if(action.payload.username){
+                state.loggedUser = action.payload.username;
+            }else {
+                state.loggedUser = action.payload.status;
+            }
         },
         setLoggedOut(state){
             state.loggedUser = null;
