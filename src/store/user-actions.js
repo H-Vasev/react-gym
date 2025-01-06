@@ -20,8 +20,9 @@ export const fetchRegisteredUser = (email, password, confirmPassword) => {
     try {
       const response = await fetchData();
 
+      console.log(response);
       const token = response.token;
-      localStorage.setItem("authUser", token);
+      //document.cookie = `authUser=${token}; path=/; max-age=86400; Secure; SameSite=Strict`;
 
       dispatch(userActions.registerUser(response));
     } catch (error) {
@@ -37,6 +38,7 @@ export const fetchLogIn = (email, password) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
+        credentials: "include"
       });
 
       if (!response.ok) {
@@ -54,8 +56,11 @@ export const fetchLogIn = (email, password) => {
     try {
       const response = await fetchData();
 
+      console.log(response)
       const token = response.token;
-      localStorage.setItem("authUser", token);
+     // localStorage.setItem("token", token);
+      //document.cookie = `authUser=${token}; path=/; max-age=86400; Secure; SameSite=Strict`;
+
       despatch(userActions.setLoggedIn(response));
     } catch (error) {
       return error.message;

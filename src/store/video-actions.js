@@ -8,14 +8,23 @@ export const popUpIsVisible = (data) => {
 }
 
 export const fetchVideoData = () => {
+  //const token = localStorage.getItem("token");
+
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7010/exercise/allExercises");
+      const response = await fetch(
+        "https://localhost:7010/exercise/allExercises",
+        {
+          method: "GET",
+          credentials: "include"
+        }
+      );
 
       const data = await response.json();
+      console.log(data);
       return data;
     };
-    
+
     const videoData = await fetchData();
     dispatch(videoActions.allVideos(videoData));
   };

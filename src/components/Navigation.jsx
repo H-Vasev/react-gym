@@ -15,7 +15,6 @@ export default function Navigation() {
   const isVisible = popUpData.isVisible;
 
   const isLoggedIn = useSelector((state) => state.user.loggedUser); 
-  console.log(isLoggedIn)
 
   useEffect(() => {
     if (isVisible) {
@@ -30,7 +29,7 @@ export default function Navigation() {
   }, [isVisible, dispatch]);
 
   function handleLogout(){
-    localStorage.removeItem("authUser");
+   // document.cookie = "authUser=; max-age=0;";
 
     dispatch(userActions.setLoggedOut())
   }

@@ -9,7 +9,6 @@ const userSlice = createSlice({
             state.loggedUser = action.payload.username;
         },
         setLoggedIn(state, action){
-            console.log(action.payload)
             if(action.payload.username){
                 state.loggedUser = action.payload.username;
             }else {
@@ -17,6 +16,7 @@ const userSlice = createSlice({
             }
         },
         setLoggedOut(state){
+            //localStorage.removeItem("token");
             state.loggedUser = null;
         }
     }

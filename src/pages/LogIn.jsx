@@ -28,8 +28,6 @@ export default function LogIn() {
     setSignUp((state) => !state);
   }
 
-  console.log(signUp);
-
   async function handleRegister(event) {
     event.preventDefault();
 
